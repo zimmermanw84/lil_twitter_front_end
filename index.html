@@ -1,0 +1,19 @@
+<html lang='en'>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <title>Li'l Twitter</title>
+  <script type="text/javascript" src="handlebars.js"></script>
+  <script id="questions-template" type="text/x-handlebars-template">
+  {{#each questions}}
+  <section class='tweet_id_{{id}}'>
+  {{content}}
+  </section>
+  {{/each}}
+  </script>
+</head>
+<body>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="application.js"></script>
+</body>
+</html>
