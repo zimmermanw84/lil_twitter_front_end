@@ -3,16 +3,35 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <title>Li'l Twitter</title>
   <script type="text/javascript" src="handlebars.js"></script>
-  <script id="questions-template" type="text/x-handlebars-template">
-  {{#each questions}}
-  <section class='tweet_id_{{id}}'>
-  {{content}}
+  <script id="tweets-template" type="text/x-handlebars-template">
+  <ul class="list-group">
+  {{#each tweets}}
+  <section id='tweet_id_{{id}}'>
+  <li class="list-group-item">Tweeter: {{user_handle}}</li>
+  <li class="list-group-item">Tweet: {{content}}</li>
   </section>
   {{/each}}
+  </ul>
+  </script>
+  <script id="tweet-template" type="text/x-handlebars-template">
+  <section id='tweet_id_{{id}}'>
+  <li class="list-group-item">Tweeter: {{tweet.user_handle}}</li>
+  <li class="list-group-item">Tweet: {{tweet.content}}</li>
+  </section>
   </script>
 </head>
 <body>
-
+  <div class="container">
+    <h1 class="page-header">Welcome To Li'l Twitter <small>name was not my idea..</small></h1>
+      <form class="tweet-form">
+        <label>Enter User Handle</label>
+        <input id="user_handle" type='text' name='tweet[user_handle]'>
+        <label>Tweet</label>
+        <textarea id="content" type='text' name='tweet[content]'></textarea>
+        <input type='submit' value='Tweet!'>
+      </form>
+    <section class="tweet-container"></section>
+  </div>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script type="text/javascript" src="application.js"></script>
 </body>
