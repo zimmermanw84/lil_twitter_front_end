@@ -91,8 +91,7 @@ var searchPageModule = (function() {
     if (tweets.length < 1) {
       $('.tweet-search-container').prepend('<h1>Sorry... No Tweets Found</h1>');
     } else {
-
-    $('.tweet-search-container').prepend(tweetsTemplate({ tweets: tweets }));
+      $('.tweet-search-container').prepend(tweetsTemplate({ tweets: tweets }));
     }
   };
 
@@ -100,9 +99,9 @@ var searchPageModule = (function() {
   var bindSearchEvent = function() {
     $('.search-tweet').on('submit', function(event) {
       event.preventDefault();
-      $('.tweet-search-container').html('');
+      $('.tweet-search-container').html(''); // Clear Tweet Search Container
       findTweets(renderFoundTweets);
-      $('#search-field').val('');
+      $('#search-field').val(''); // Clear Search Field
     });
   };
 
