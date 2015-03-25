@@ -49,9 +49,19 @@ var handleLandingPageTweets = (function() {
     })
   };
 
+
+
+  var renderSearchPage = function() {
+    $('.render-search').on('click', function(event) {
+      $('.main-page').css('display', 'none');
+      $('.search-page').css('display', 'block');
+    })
+  };
+
   var init = function() {
     getTweets(renderAllTweets);
     bindTweetEvent();
+    renderSearchPage();
   };
 
   return {
@@ -60,4 +70,59 @@ var handleLandingPageTweets = (function() {
 
 })();
 
+// ----------------------------------------------- //
+
+var searchPageModule = (function() {
+
+  "use strict";
+
+  var html;
+
+  var findTweets = function(callback) {
+    $.get('http://localhost:3000/tweets/search', $('.search-tweet').serialize())
+      .success( function(tweets) {
+        callback(tweets);
+    });
+  };
+
+  var renderFoundTweets = function(tweets) {
+    html = $('#tweets-template').html();
+    var tweetsTemplate = Handlebars.compile(html);
+    if (tweets.length < 1) {
+      $('.tweet-search-container').prepend('<h1>Sorry... No Tweets Found</h1>');
+    } else {
+
+    $('.tweet-search-container').prepend(tweetsTemplate({ tweets: tweets }));
+    }
+  };
+
+
+  var bindSearchEvent = function() {
+    $('.search-tweet').on('submit', function(event) {
+      event.preventDefault();
+      $('.tweet-search-container').html('');
+      findTweets(renderFoundTweets);
+      $('#search-field').val('');
+    });
+  };
+
+  var renderMainPage = function() {
+    $('.render-main').on('click', function(event) {
+      $('.search-page').css('display', 'none');
+      $('.main-page').css('display', 'block');
+    })
+  };
+
+  var init = function() {
+    bindSearchEvent();
+    renderMainPage();
+  };
+
+  return {
+    init: init,
+  };
+
+})();
+
+searchPageModule.init();
 handleLandingPageTweets.init();
