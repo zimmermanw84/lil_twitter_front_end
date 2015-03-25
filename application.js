@@ -109,7 +109,7 @@ var searchPageModule = (function() {
       event.preventDefault();
       $('.tweet-search-container').html(''); // Clear Tweet Search Container
       findTweets(renderFoundTweets);
-      $('#search-field').css('border', 'none'); // Clear Red Border if true
+      $('#search-field').css('border', '1px solid black'); // Clear Red Border if true
       $('#search-field').val(''); // Clear Search Field
     });
   };
