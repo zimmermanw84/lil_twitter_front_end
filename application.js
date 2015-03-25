@@ -12,8 +12,12 @@ var handleLandingPageTweets = (function() {
   };
 
   var getTweets = function(callback) {
-    $.get('http://localhost:3000/tweets').success( function(tweets) {
+    $.get('http://localhost:3000/tweets')
+    .success( function(tweets) {
       callback(tweets);
+    })
+    .error(function() {
+      throw 'No Data Recieved: Get Tweets'
     });
   };
 
@@ -36,7 +40,7 @@ var handleLandingPageTweets = (function() {
     });
 
     promise.error(function() {
-      console.log('NO SOUP FOR YOU')
+      throw 'No Data Saved: Create New Tweet'
     })
 
   };
@@ -82,7 +86,10 @@ var searchPageModule = (function() {
     $.get('http://localhost:3000/tweets/search', $('.search-tweet').serialize())
       .success( function(tweets) {
         callback(tweets);
-    });
+      })
+      .error(function() {
+        throw 'No Data Recieved: Find Tweets'
+      })
   };
 
   var renderFoundTweets = function(tweets) {
@@ -90,6 +97,7 @@ var searchPageModule = (function() {
     var tweetsTemplate = Handlebars.compile(html);
     if (tweets.length < 1) {
       $('.tweet-search-container').prepend('<h1>Sorry... No Tweets Found</h1>');
+      $('#search-field').css('border', '3px solid red');
     } else {
       $('.tweet-search-container').prepend(tweetsTemplate({ tweets: tweets }));
     }
@@ -101,6 +109,7 @@ var searchPageModule = (function() {
       event.preventDefault();
       $('.tweet-search-container').html(''); // Clear Tweet Search Container
       findTweets(renderFoundTweets);
+      $('#search-field').css('border', 'none'); // Clear Red Border if true
       $('#search-field').val(''); // Clear Search Field
     });
   };
