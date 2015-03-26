@@ -8,7 +8,7 @@ var handleLandingPageTweets = (function() {
   var renderAllTweets = function(tweets) {
     html = $('#tweets-template').html();
     var tweetsTemplate = Handlebars.compile(html);
-    $('.tweet-container').prepend(tweetsTemplate({ tweets: tweets }))
+    $('.tweet-container').prepend(tweetsTemplate({ tweets: tweets }));
   };
 
   var getTweets = function(callback) {
@@ -17,7 +17,7 @@ var handleLandingPageTweets = (function() {
       callback(tweets);
     })
     .error(function() {
-      throw 'No Data Recieved: Get Tweets'
+      throw 'No Data Recieved: Get Tweets';
     });
   };
 
@@ -29,7 +29,7 @@ var handleLandingPageTweets = (function() {
   var renderNewTweet = function(tweet) {
     html = $('#tweet-template').html();
     var tweetTemplate = Handlebars.compile(html);
-    $(".list-group").prepend(tweetTemplate({ tweet: tweet }))
+    $(".list-group").prepend(tweetTemplate({ tweet: tweet }));
   };
 
   var createNewTweet = function(callback) {
@@ -40,9 +40,8 @@ var handleLandingPageTweets = (function() {
     });
 
     promise.error(function() {
-      throw 'No Data Saved: Create New Tweet'
+      throw 'No Data Saved: Create New Tweet';
     })
-
   };
 
   var bindTweetEvent = function() {
@@ -52,8 +51,6 @@ var handleLandingPageTweets = (function() {
       clearForm();
     })
   };
-
-
 
   var renderSearchPage = function() {
     $('.render-search').on('click', function(event) {
@@ -100,9 +97,9 @@ var searchPageModule = (function() {
       $('#search-field').css('border', '3px solid red');
     } else {
       $('.tweet-search-container').prepend(tweetsTemplate({ tweets: tweets }));
+      $('#search-field').val(''); // Clear Search Field
     }
   };
-
 
   var bindSearchEvent = function() {
     $('.search-tweet').on('submit', function(event) {
@@ -110,7 +107,6 @@ var searchPageModule = (function() {
       $('.tweet-search-container').html(''); // Clear Tweet Search Container
       findTweets(renderFoundTweets);
       $('#search-field').css('border', '1px solid black'); // Clear Red Border if true
-      $('#search-field').val(''); // Clear Search Field
     });
   };
 
