@@ -13,10 +13,10 @@ var handleLandingPageTweets = (function() {
 
   var getTweets = function(callback) {
     $.get('http://localhost:3000/tweets')
-    .success( function(tweets) {
-      callback(tweets);
+      .success( function(tweets) {
+        callback(tweets);
     })
-    .error(function() {
+      .error(function() {
       throw 'No Data Recieved: Get Tweets';
     });
   };
